@@ -9,8 +9,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $domain = filter_input(INPUT_POST, 'domain');
-$relativePath = "ZatimRandomJsemLinejLol/" . $domain;
-$path = __DIR__ . '/' . $relativePath;
+$path = "C:\Users\Admin\Documents\Domens\\" . $domain;
 
 if (!empty($domain)) {
     if (preg_match("/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $domain)) {
