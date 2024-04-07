@@ -22,28 +22,35 @@ if (!empty($domain)) {
             $insertQuery = $conn->prepare("INSERT INTO users_domains (id_user, domain, path) VALUES (?, ?, ?)");
             $insertQuery->bind_param("iss", $id_user, $domain, $path);
             if ($insertQuery->execute()) {
-                echo "Doména byla úspěšně zaregistrovaná s cestou: $path";
-                
+                echo '<script>alert("Doména byla úspěšně zaregistrovaná s cestou: '.$path.'")</script>';
+                echo '<script>window.location="index.php"</script>';
                 if (!file_exists($path)) {
                     if (mkdir($path, 0777, true)) { // Povolení čtení, zápisu a spuštění pro všechny uživatele
-                        echo " Složka byla úspěšně vytvořena.";
+                        echo '<script>alert(" Složka byla úspěšně vytvořena.")</script>';
+                        echo '<script>window.location="index.php"</script>';
                     } else {
-                        echo " Nelze vytvořit složku.";
+                        echo '<script>alert(" Nelze vytvořit složku.")</script>';
+                        echo '<script>window.location="index.php"</script>';
                     }
                 } else {
-                    echo " Složka již existuje.";
+                    echo '<script>alert(" Složka již existuje.")</script>';
+                    echo '<script>window.location="index.php"</script>';
                 }
             } else {
-                echo "Chyba při registraci domény.";
+                echo '<script>alert("Chyba při registraci domény.")</script>';
+                echo '<script>window.location="index.php"</script>';
             }
         } else {
-            echo "Doména je již zaregistrovaná.";
+            echo '<script>alert("Doména je již zaregistrovaná.")</script>';
+            echo '<script>window.location="index.php"</script>';
         }
     } else {
-        echo "Neplatný formát domény.";
+        echo '<script>alert("Neplatný formát domény.")</script>';
+        echo '<script>window.location="index.php"</script>';
     }
 } else {
-    echo "Prosím, zadejte doménu.";
+    echo '<script>alert("Prosím, zadejte doménu.")</script>';
+    echo '<script>window.location="index.php"</script>';
 }
 
 $conn->close();

@@ -20,14 +20,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['username']) && !empty
             $_SESSION['username'] = $username;
             header("Location: ../index.php");
         } else {
-            echo "Nesprávné heslo.";
+            echo '<script>alert("Nesprávné heslo.")</script>';
+            echo '<script>window.location="../userLogin"</script>';
         }
     } else {
-        echo "Uživatelské jméno neexistuje.";
+        echo '<script>alert("Uživatelské jméno neexistuje.")</script>';
+        echo '<script>window.location="../userLogin"</script>';  
     }
     $query->close();
     $conn->close();
 } else {
-    echo "Chybný požadavek.";
+    echo '<script>alert("Chybný požadavek.")</script>';
+    echo '<script>window.location="userRegister.html"</script>';
 }
 ?>

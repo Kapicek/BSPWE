@@ -10,23 +10,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['username']) && !empty
     $checkUser->execute();
     $checkUser->store_result();
     
-    if ($checkUser->num_rows == 0) {
+    if ($checkUser->num_rows() == 0 ) {
         $insert = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
         $insert->bind_param("ss", $username, $password);
         
         if ($insert->execute()) {
-            echo "Uživatel byl úspěšně zaregistrován.";
-            header("Location: ../index.php");
+            echo '<script>alert("Uživatel byl úspěšně zaregistrován.")</script>';
+            echo '<script>window.location="../index.php"</script>';
         } else {
-            echo "Nepodařilo se zaregistrovat uživatele.";
+            echo '<script>alert("Nepodařilo se zaregistrovat uživatele.")</script>';
+            echo '<script>window.location="userRegister.html"</script>';
         }
     } else {
-        echo "Uživatelské jméno již existuje.";
+        echo '<script>alert("Uživatelské jméno již existuje.")</script>';
+        echo '<script>window.location="userRegister.html"</script>';
     }
     $checkUser->close();
     $insert->close();
     $conn->close();
 } else {
-    echo "Chybný požadavek.";
+    echo '<script>alert("Chybný požadavek.")</script>';
+    echo '<script>window.location="userRegister.html"</script>';
 }
 ?>
